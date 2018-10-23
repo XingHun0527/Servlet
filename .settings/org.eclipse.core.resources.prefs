@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+encoding//src/com/briup/bean/IStudentMapper.java=UTF-8
+encoding//src/com/briup/dao/UserDao.java=UTF-8
+encoding//src/com/briup/handler/AddressHandler.java=UTF-8
+encoding//src/com/briup/test/CustomerTest.java=UTF-8
+encoding//src/com/briup/test/MybatisBase.java=UTF-8
+encoding//src/com/briup/utils/MybatisSqlSessionFactory.java=UTF-8

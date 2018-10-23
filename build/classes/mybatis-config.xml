@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd"> 
+<configuration> 
+  <!--配置参数 key value 取值:${author}  -->
+  <properties resource="db.properties">
+  	<!--db.properties的优先级更高   -->
+  	<property name="author" value="briup"/>
+  	<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+  </properties>
+  <!-- 类型别名 -->
+  <typeAliases> 
+	<!-- <typeAlias alias="Student" type="com.briup.bean.Student" />
+	<typeAlias alias="tea" type="com.briup.bean.Teacher"/>  -->
+	<!--
+		自动给当前包下所有的javabean提供一个别名：默认为：类名首字母小写
+		大小写不区分 
+		eg: com.briup.bean.Student -> student
+		
+		需要借助于注解 @Alias("stu")
+	-->
+	<package name="com.briup.bean"/>
+  </typeAliases> 
+  <!-- 
+  		类型处理器: 基本数据类型 String byte[] 枚举类型 Date
+  			number <-> Integer
+  		自定义的类型处理器	
+   -->
+  <typeHandlers>
+  	<typeHandler handler="com.briup.handler.AddressHandler"/>
+  </typeHandlers>
+  <!--数据库开发环境  -->
+  <environments default="oracle">
+  	 <!--开发环境  -->
+	<environment id="oracle">
+	  <!--事务管理器  --> 
+	  <transactionManager type="JDBC" />
+	  <!--数据源 数据连接信息--> 
+	   <dataSource type="POOLED">
+		<!--
+		<property name="driver" value="com.mysql.jdbc.Driver" /> 
+		<property name="url" value="jdbc:mysql://localhost:3306/test" /> 
+		-->
+		<property name="driver" value="${driver}" /> 
+		<property name="url" value="jdbc:oracle:thin:@172.16.14.130:1521:XE" /> 
+		<property name="username" value="boss" /> 
+		<property name="password" value="boss" /> 
+	  </dataSource> 
+	</environment> 
+	</environments>
+	<!-- 生产环境 -->
+	<!-- <environment id="mysql"> 
+	  <transactionManager type="JDBC" />
+	  数据源 数据连接信息 
+	   <dataSource type="POOLED">
+		<property name="driver" value="com.mysql.jdbc.Driver" /> 
+		<property name="url" value="${mysqlUrl}" /> 
+		<property name="username" value="briup" /> 
+		<property name="password" value="briup" /> 
+	  </dataSource> 
+	</environment> 
+  </environments> --> 
+  <!-- 映射文件 -->
+  <mappers> 
+	<mapper resource="com/briup/bean/StudentMapper.xml" /> 
+	<mapper resource="com/briup/bean/CustomerMapper.xml" />
+	<mapper resource="com/briup/bean/O2OMapper.xml" />
+	<!-- <mapper url="file:////Users/angelia/Documents/java-workspace/mybatis1808/src/com/briup/bean/CustomerMapper.xml"/> -->
+	<!--class与package需要配合注解使用  -->
+	<!-- <mapper class="com.briup.dao.ICustomerMapper"/> -->
+	<!-- <package name="com.briup.dao"/> -->
+  </mappers> 
+
+</configuration>
